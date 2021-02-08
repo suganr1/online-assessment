@@ -1,0 +1,37 @@
+<div class="col-sm-9 col-lg-9 mx-auto">
+    <div class="card">
+        <h5 class="card-header text-center"><b>{{title}}</b></h5>
+        <div class="card-body">
+            <div class="d-flex p-1 form-row justify-content-center">
+                <div class="col text-center">
+                    <span> Status: </span>
+                    <span [ngClass]="(percentage >= 50)?'correctAnswer':'wrongAnswer'">
+                        {{percentage >= 50 ? 'Pass' : 'Fail'}} </span>
+                </div>
+            </div>
+
+            <div class="d-flex p-2" *ngFor="let ques of reviewAnswers; index as i;">
+                <div class="col-sm-8"><strong>{{i+1}}. {{ques.question}}</strong></div>
+                <div class="col-sm-4" [ngClass]="(ques.correctAnswer === ques.selected)?'correctAnswer':'wrongAnswer'">
+                    {{ques.correctAnswer}}</div>
+            </div>
+
+            <div class="d-flex p-2  justify-content-center">
+                Total Questions: {{totalQuestions}}
+            </div>
+            <div class="d-flex p-2  justify-content-center">
+                Correct Answer(s): {{correctAnswer}}
+            </div>
+            <div class="d-flex p-2  justify-content-center">
+                Wrong Answer(s): {{wrongAnswer}}
+            </div>
+            <div class="d-flex p-2  justify-content-center">
+                Percentage: {{percentage}}%
+            </div>
+
+            <div class="form-group col text-center">
+                <button class="btn btn-danger" (click)="goToHome()">Go To Home</button>
+            </div>
+
+        </div>
+    </div>

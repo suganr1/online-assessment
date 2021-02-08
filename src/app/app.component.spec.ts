@@ -1,31 +1,46 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+
 describe('AppComponent', () => {
+
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      declarations: [AppComponent]
+    });
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+
+    fixture.detectChanges();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it("logout", () => {
+    component.logout();
   });
 
-  it(`should have as title 'online-skill-assessment'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('online-skill-assessment');
-  });
+  // describe(':', () => {
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('online-skill-assessment app is running!');
-  });
+  //   function setup() {
+  //     const fixture = TestBed.createComponent(AppComponent);
+  //     const app = fixture.debugElement.componentInstance;
+  //     return { fixture, app };
+  //   }
+
+  //   it('should create the app', async(() => {
+  //     const { app } = setup();
+  //     expect(app).toBeTruthy();
+  //   }));
+
+  //   it('logout', async(() => {
+  //     expect(setup.logout()).toBeTruthy();
+  //   }));
+  // });
+
 });

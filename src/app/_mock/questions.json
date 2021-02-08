@@ -1,0 +1,45 @@
+{
+  "questionsAnswersMock": [
+    {
+      "id": 1,
+      "language": "Angular",
+      "question": "Angular question 1?",
+      "optionList": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "correctAnswer": "Option A"
+    },
+    {
+      "id": 1,
+      "language": ".Net Framework",
+      "question": ".Net Framework question 1?",
+      "optionList": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "correctAnswer": "Option A"
+    },
+    {
+      "id": 1,
+      "language": "SQL",
+      "question": "SQL question 1?",
+      "optionList": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "correctAnswer": "Option A"
+    }
+  ],
+  "examList": [
+    "Angular",
+    ".Net Framework",
+    "SQL"
+  ]
+}

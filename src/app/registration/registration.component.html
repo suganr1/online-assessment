@@ -1,0 +1,292 @@
+<body>
+    <div class="col-sm-9 col-lg-7 mx-auto">
+        <div class="card">
+            <h5 class="card-header text-center"><b>{{title}}</b></h5>
+            <div class="card-body">
+                <form name="form" #myForm="ngForm" (ngSubmit)="myForm.form.valid && onSubmit()">
+                    <div class="d-flex form-row justify-content-center">
+                        <div class=" form-group col p-2">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Name</mat-label>
+                                <input matInput type="text" name="name" placeholder="Name *"
+                                    [(ngModel)]="userModel.name" #name="ngModel" required>
+                                <mat-error *ngIf="myForm.submitted && name.invalid">Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <input type="text" name="name" placeholder="Name *" class="form-control w-75 form-control-sm"
+                                [(ngModel)]="userModel.name" #name="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && name.invalid}" required>
+                            <div *ngIf="myForm.submitted && name.invalid" class="invalid-feedback">
+                                <div *ngIf="name.errors.required">Name is required</div>
+                            </div> -->
+                        </div>
+
+                        <div class="form-group col p-2">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Username</mat-label>
+                                <input matInput type="text" name="Username" placeholder="Username *"
+                                    [(ngModel)]="userModel.userName" #userName="ngModel" required>
+                                <mat-error *ngIf="myForm.submitted && userName.invalid">Username is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <input type="text" name="Username" placeholder="Username *"
+                                class="form-control w-75 form-control-sm" [(ngModel)]="userModel.userName" #userName="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && userName.invalid}" required>
+                            <div *ngIf="myForm.submitted && userName.invalid" class="invalid-feedback">
+                                <div *ngIf="userName.errors.required">Username is required</div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" name="password"
+                                    placeholder="Password *" [(ngModel)]="userModel.password" #password="ngModel"
+                                    required>
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off':'visibility'}}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="myForm.submitted && password.invalid">Password is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <input type="password" name="password" placeholder="Password"
+                                class="form-control w-75 form-control-sm" [(ngModel)]="userModel.password" #password="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && password.invalid}" required>
+                            <div *ngIf="myForm.submitted && password.invalid" class="invalid-feedback">
+                                <div *ngIf="password.errors.required">Password is required</div>
+                            </div> -->
+                        </div>
+
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Confirm Password</mat-label>
+                                <input matInput type="password" name="confirmPassword" placeholder="Confirm Password *"
+                                    [(ngModel)]="userModel.confirmPassword" #confirmPassword="ngModel"
+                                    ngValidateEqual="password" required>
+                                <mat-error *ngIf="myForm.submitted && confirmPassword.invalid">Confirm Password is
+                                    <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf="confirmPassword && confirmPassword.hasError('notEqual')">
+                                    <strong>Passwords</strong> must match
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <input type="password" name="password" placeholder="Re-enter Password"
+                                class="form-control w-75 form-control-sm" [(ngModel)]="userModel.confirmPassword"
+                                #confirmPassword="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && confirmPassword.invalid}" required>
+                            <div *ngIf="myForm.submitted && confirmPassword.invalid" class="invalid-feedback">
+                                <div *ngIf="confirmPassword.errors.required">Confirm Password is required</div>
+                            </div>
+                            <div class="colorRed" *ngIf="userModel.password !== userModel.confirmPassword">Passwords must match
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Address</mat-label>
+                                <textarea matInput name="address" placeholder="Address" [(ngModel)]="userModel.address"
+                                    #address="ngModel" required></textarea>
+                                <mat-error *ngIf="myForm.submitted && address.invalid">Address is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <textarea name="address" placeholder="Address" class="form-control form-control-sm"
+                                [(ngModel)]="userModel.address" #address="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && address.invalid}" required></textarea> -->
+                            <!-- <input type="text" name="address" placeholder="Address" class="form-control form-control-sm"
+                                [(ngModel)]="userModel.address" #address="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && address.invalid}" required> -->
+                            <!-- <div *ngIf="myForm.submitted && address.invalid" class="invalid-feedback">
+                                <div *ngIf="address.errors.required">Address is required</div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Country</mat-label>
+                                <mat-select name="country" placeholder="Select Country" [(ngModel)]="userModel.country"
+                                    #country="ngModel" required (selectionChange)="loadState($event.value)">
+                                    <mat-option value="">Select Country</mat-option>
+                                    <mat-option *ngFor="let country of countryList" value="{{country.name}}">
+                                        {{country.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="myForm.submitted && country.invalid">Country is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <select name="country" placeholder="Country" class="form-control form-control-sm"
+                                placeholder="Select Country" [(ngModel)]="userModel.country" #country="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && country.invalid}" required
+                                (change)="loadState($event.target.value)">
+                                <option value="">Select Country</option>
+                                <option *ngFor="let country of countryList" value="{{country.name}}">
+                                    {{country.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="myForm.submitted && country.invalid" class="invalid-feedback">
+                                <div *ngIf="country.errors.required">Country is required</div>
+                            </div> -->
+                        </div>
+
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>State</mat-label>
+                                <mat-select name="state" placeholder="Select State" [(ngModel)]="userModel.state"
+                                    #state="ngModel" required>
+                                    <mat-option value="">Select State</mat-option>
+                                    <mat-option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="myForm.submitted && state.invalid">State is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <select name="state" placeholder="State" class="form-control form-control-sm"
+                                placeholder="Select State" [(ngModel)]="userModel.state" #state="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && state.invalid}" required>
+                                <option value="">Select State</option>
+                                <option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}</option>
+                            </select>
+                            <div *ngIf="myForm.submitted && state.invalid" class="invalid-feedback">
+                                <div *ngIf="state.errors.required">State is required</div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>E-Mail Address</mat-label>
+                                <input matInput type="email" name="emailAddress" placeholder="E-Mail Address *"
+                                    [(ngModel)]="userModel.emailAddress" #emailAddress="ngModel" required email="true">
+                                <mat-error *ngIf="emailAddress.errors?.required">Email Address is required
+                                </mat-error>
+                                <mat-error *ngIf="emailAddress.errors?.email">Email must be a valid email address
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <input type="email" name="email" placeholder="E-Mail" class="form-control form-control-sm"
+                                [(ngModel)]="userModel.emailAddress" #emailAddress="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && emailAddress.invalid}" required email>
+                            <div *ngIf="myForm.submitted && emailAddress.invalid" class="invalid-feedback">
+                                <div *ngIf="emailAddress.errors.required">Email Address is required</div>
+                                <div *ngIf="emailAddress.errors.email">Email must be a valid email address</div>
+                            </div> -->
+                        </div>
+
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Gender</mat-label>
+                                <mat-select name="gender" placeholder="Select Gender" [(ngModel)]="userModel.gender"
+                                    #gender="ngModel" required>
+                                    <mat-option value="">Select Gender</mat-option>
+                                    <mat-option value="Male">Male</mat-option>
+                                    <mat-option value="Female">Female</mat-option>
+                                    <mat-option value="Others">Other</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="myForm.submitted && gender.invalid">Gender is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <select name="gender" placeholder="Gender" class="form-control form-control-sm"
+                                placeholder="Select Gender" [(ngModel)]="userModel.gender" #gender="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && gender.invalid}" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            <div *ngIf="myForm.submitted && gender.invalid" class="invalid-feedback">
+                                <div *ngIf="gender.errors.required">Gender is required</div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>Contact Number</mat-label>
+                                <input matInput type="text" name="contactNumber" placeholder="Contact Number *"
+                                    [(ngModel)]="userModel.contactNumber" #contactNumber="ngModel" maxlength="10"
+                                    numberOnly required>
+                                <mat-error *ngIf="contactNumber.errors?.required">Contact Number is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <input type="text" name="contactNumber" placeholder="Contact Number"
+                                class="form-control form-control-sm" [(ngModel)]="userModel.contactNumber"
+                                #contactNumber="ngModel" [ngClass]="{'is-invalid': myForm.submitted && contactNumber.invalid}"
+                                minlength="10" maxlength="10" numberOnly required>
+                            <div *ngIf="myForm.submitted && contactNumber.invalid" class="invalid-feedback">
+                                <div *ngIf="contactNumber.errors.required">Contact Number is required</div>
+                                <div *ngIf="contactNumber.value && contactNumber.value.length > 0">
+                                    Contact Number must be 10 digit</div>
+                            </div> -->
+                        </div>
+
+                        <div class="form-group col">
+                            <mat-form-field class="formInput-Full">
+                                <mat-label>State</mat-label>
+                                <mat-select name="role" placeholder="Select Role" [(ngModel)]="userModel.role"
+                                    #role="ngModel" required>
+                                    <mat-option value="">Select Role</mat-option>
+                                    <mat-option value="Admin">Admin</mat-option>
+                                    <mat-option value="User">User</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="myForm.submitted && role.invalid">Role is
+                                    <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <select name="role" placeholder="Role" class="form-control form-control-sm"
+                                placeholder="Select Role" [(ngModel)]="userModel.role" #role="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && role.invalid}" required>
+                                <option value="">Choose Role</option>
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                            </select>
+                            <div *ngIf="myForm.submitted && role.invalid" class="invalid-feedback">
+                                <div *ngIf="role.errors.required">Role is required</div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <mat-form-field class="formInput-Full">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput type="text" name="companyName" placeholder="Company Name *"
+                                [(ngModel)]="userModel.companyName" #companyName="ngModel" required>
+                            <mat-error *ngIf="myForm.submitted && companyName.invalid">Company Name is
+                                <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <!-- <div class="form-group col">
+                            <input type="text" name="companyName" placeholder="Company Name"
+                                class="form-control form-control-sm" [(ngModel)]="userModel.companyName" #companyName="ngModel"
+                                [ngClass]="{'is-invalid': myForm.submitted && companyName.invalid}" required>
+                            <div *ngIf="myForm.submitted && companyName.invalid" class="invalid-feedback">
+                                <div *ngIf="companyName.errors.required">Company Name is required</div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col text-center">
+                            <button type="submit" class="btn btn-primary">{{updateText}}</button>
+                            <a class="btn btn-link" (click)="cancelRegistration()">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
